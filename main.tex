@@ -1,0 +1,348 @@
+% This is a mess, don't look at me
+
+\documentclass[12pt]{article}
+\linespread{1.2}
+\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\half}{$\frac{1}{2}$}
+\newcommand{\first}{1\textsuperscript{st}}
+\newcommand{\second}{2\textsuperscript{nd}}
+\newcommand{\third}{3\textsuperscript{rd}}
+\newcommand{\nth}[1]{#1\textsuperscript{th}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+
+\usepackage{musixtex}
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning, trees}
+
+\newlength{\tpheight}\setlength{\tpheight}{0.9\textheight}
+\newlength{\txtheight}\setlength{\txtheight}{0.9\tpheight}
+\newlength{\tpwidth}\setlength{\tpwidth}{0.9\textwidth}
+\newlength{\txtwidth}\setlength{\txtwidth}{0.9\tpwidth}
+\newlength{\drop}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\begin{document}
+
+\begin{titlepage}
+  \drop=0.1\txtheight
+  \centering
+
+  \settowidth{\unitlength}{\LARGE A non-gentle Introduction \& Reference to Classical Guitar}
+  \vspace*{\baselineskip}
+
+  {\large\scshape Zirak}\\[\baselineskip]
+  \rule{\unitlength}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+  \rule{\unitlength}{0.4pt}\\[\baselineskip]
+  {\LARGE A non-gentle Introduction \& Reference to Classical Guitar}\\[\baselineskip]
+  {\itshape for those it may concern}\\[0.2\baselineskip]
+  \rule{\unitlength}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+  \rule{\unitlength}{1.6pt}\\[\baselineskip]
+  \vfill
+  {\small\scshape 2017}\par
+  \vspace*{\drop}
+\end{titlepage}
+
+\tableofcontents
+
+\section{Music}
+
+Sound is vibrations moving through the air at certain frequencies. We give names to frequencies which sound good:
+
+\begin{itemize}
+\item Do (C) \textit{261.63 Hz}
+\item Re (D) \textit{293.66 Hz}
+\item Mi (E) \textit{329.63 Hz}
+\item Fa (F) \textit{349.23 Hz}
+\item Sol (G) \textit{392.00 Hz}
+\item La (A) \textit{440.00 Hz}
+\item Si (B) \textit{493.88 Hz}
+\item Do (C) \textit{523.25 Hz}
+\end{itemize}
+
+And so on and so forth. Note that two notations are used: Note names (do re mi) and single-letter characters. The former are commonly known among classical players, the latter are more widely known by modern guitar players. Knowing both is, of course, the best. I will use them interchangeably throughout.
+
+The distance between every iteration of a sound (e.g. Do to Do) is called an \emph{octave}. As you can see the distance between note frequencies changes, and ranges between what we call a \emph{tone} and a \emph{semitone} (\half tone). An octave is made out of 12 semitones.
+
+\begin{tikzpicture}[->,auto]
+  \def \n {6.2}
+  \def \radius {1.7}
+  \def \from {-90}
+  \def \angle {-360/\n}
+
+  \path circle(\radius)(0:-\radius)
+  (\from:-\radius)circle(1pt)
+  node[anchor=\from](do){$do$}
+
+  ({\from+\angle}:-\radius)circle(1pt)
+  node[anchor={\from+\angle}](re){$re$}
+
+  ({\from+\angle*2}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*2}](mi){$mi$}
+
+  ({\from+\angle*2.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*2.5}](fa){$fa$}
+
+  ({\from+\angle*3.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*3.5}](sol){$sol$}
+
+  ({\from+\angle*4.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*4.5}](la){$la$}
+
+  ({\from+\angle*5.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*5.5}](si){$si$}
+  ;
+
+  \path (do) edge [bend left=15] node {$tone$} (re)
+    (re) edge [bend left=15] node {$tone$} (mi)
+    (mi) edge [bend left=15] node {\half $tone$} (fa)
+    (fa) edge [bend left=15] node {$tone$} (sol)
+    (sol) edge [bend left=15] node {$tone$} (la)
+    (la) edge [bend left=15] node {$tone$} (si)
+    (si) edge [bend left=15] node {\half $tone$} (do)
+  ;
+\end{tikzpicture}
+
+(incomplete as fuuuuck, positioning is hard, don't judge me)
+
+You must be asking ``well hey, if some sounds are only a semitone apart, what mystery lies between notes which are a tone apart?'' Great question imaginary reader! Semitone intervals are annotated with di\`ese ($\sharp$, sharp) which is a semitone higher, and bemole ($\flat$, flat) which is a semitone lower. In other words, $C\sharp$ is the same as $D\flat$! Additionally, $E\sharp$ is $F$, while $F\flat$ is $E$.  We will uses for this later on when we talk about music signatures and accidentals. A more accurate circle could be:
+
+\begin{tikzpicture}[->,auto]
+  \def \n {6.2}
+  \def \radius {1.7}
+  \def \from {-90}
+  \def \angle {-360/\n}
+
+  \path circle(\radius)(0:-\radius)
+  (\from:-\radius)circle(1pt)
+  node[anchor=\from](do){$do$} node[above of=do]{$si\sharp$}
+
+  ({\from+\angle}:-\radius)circle(1pt)
+  node[anchor={\from+\angle}](re){$re$}
+
+  ({\from+\angle*2}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*2}](mi){$mi$} node[right of=mi]{$fa\flat$}
+
+  ({\from+\angle*2.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*2.5}](fa){$fa$} node[right of=fa]{$mi\sharp$}
+
+  ({\from+\angle*3.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*3.5}](sol){$sol$}
+
+  ({\from+\angle*4.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*4.5}](la){$la$}
+
+  ({\from+\angle*5.5}:-\radius)circle(1pt)
+  node[anchor={\from+\angle*5.5}](si){$si$}
+  ;
+
+  \path (do) edge [bend left=15] node[right]{$do\sharp$} node[left]{$re\flat$} (re)
+    (re) edge [bend left=15] node[right]{$re\sharp$} node[left]{$mi\flat$} (mi)
+    (mi) edge [bend left=15] (fa)
+    (fa) edge [bend left=15] node {$tone$} (sol)
+    (sol) edge [bend left=15] node {$tone$} (la)
+    (la) edge [bend left=15] node {$tone$} (si)
+    (si) edge [bend left=15] node {\half $tone$} (do)
+  ;
+\end{tikzpicture}
+
+\section{The Fretboard}
+
+Let's leave all this gibberish behind and talk about guitars.
+
+
+The standard tuning (which string is which note) of a guitar is, from high (frequency, \first string) to low (frequency, \nth{6} string) is EBGDAE (Mi - Si - Sol - Re - La - Mi):
+
+\newcommand{\guitar}[0]{
+  \draw[help lines, draw=gray!80] (0,0) node[left=2pt] {\it{E6}} -- (4,0)
+    (0,0.5) node[left=2pt] {\it{A5}} -- (4,0.5)
+    (0,1) node[left=2pt] {\it{D4}} -- (4,1)
+    (0,1.5) node[left=2pt] {\it{G3}} -- (4,1.5)
+    (0,2) node[left=2pt] {\it{B2}} -- (4,2)
+    (0,2.5) node[left=2pt] {\it{E1}} -- (4,2.5);
+
+  \foreach \x in {0, ..., 3} {
+    \draw[black!60] (\x, 0) -- (\x, 2.5);
+  }
+  \draw[very thick] (0,0) -- (0,2.5);
+}
+
+\begin{tikzpicture}
+  \guitar
+\end{tikzpicture}
+
+Usually when high and low are used, they refer to the frequency of the sound, not how far it is from your body. In diagrams like the above, imagine they are laid out as if you are looking at the echo chamber of your guitar with the neck facing left.
+
+You may also see the same diagram, but rotated 90 degrees:
+
+\begin{tikzpicture}
+\draw[help lines, draw=gray!80]
+    (0,0) node[above=2pt] {\it{E6}} -- (0,-4)
+    (0.75,0) node[above=2pt] {\it{A5}} -- (0.75,-4)
+    (1.5,0) node[above=2pt] {\it{D4}} -- (1.5,-4)
+    (2.25,0) node[above=2pt] {\it{G3}} -- (2.25,-4)
+    (3,0) node[above=2pt] {\it{B2}} -- (3,-4)
+    (3.75,0) node[above=2pt] {\it{E1}} -- (3.75,-4);
+
+  \foreach \y in {0, ..., 3} {
+    \draw[black!60] (0, -\y) -- (3.75, -\y);
+  }
+  \draw[very thick] (0,0) -- (3.75,0);
+\end{tikzpicture}
+
+The guitar neck (fretboard) is separated by \emph{frets}, each a semitone apart. Using the Knowledge of the Circle, we can know each and every note on the guitar:
+
+\begin{tikzpicture}
+  \guitar
+
+  \draw[thick, font=\small]
+    (1,2.5) circle(1pt) node[right] {F}
+    (3,2.5) circle(1pt) node[right] {G}
+
+    (1,2)   circle(1pt) node[right] {C}
+    (3,2)   circle(1pt) node[right] {D}
+
+    (2,1.5) circle(1pt) node[right] {A}
+
+    (2,1)   circle(1pt) node[right] {E}
+    (3,1)   circle(1pt) node[right] {F}
+
+    (2,0.5) circle(1pt) node[right] {B}
+    (3,0.5) circle(1pt) node[right] {C}
+
+    (1,0)   circle(1pt) node[right] {F}
+    (3,0)   circle(1pt) node[right] {G}
+    ;
+\end{tikzpicture}
+
+And so forth. As we move on we'll see some useful patterns in the guitar neck.
+
+When we say we're playing the \emph{\first string, \first fret} that means putting our finger down right near the edge of the \first fret on the \first string (surprise?).
+
+\section{Annotating Music}
+
+Hurray, we know the name (both names) of every note and (with some effort) how to find them on the guitar neck. It's time to start reading and writing music.
+
+\begin{lilypond}
+\header{
+	title = "London Bridge"
+}
+\score{
+	{
+		\numericTimeSignature
+		d'' e'' d'' c''
+		b' c'' d''2
+		a'4 b' c''2
+		b'4 c'' d''2
+
+		d''4 e'' d'' c''
+		b' c'' d''2
+		a'4 d'' b' g'
+
+		\bar "|."
+	}
+}
+\end{lilypond}
+
+This horrible blob of madness actually has sense to it, I promise! Sheet music like this is made up of several items:
+
+\newcommand{\setmetera}[2]{\ensuremath{\genfrac{}{}{0pt}{}{#1}{#2}}}
+
+\begin{itemize}
+  \item The {\trebleclef} is known as the \emph{clef}. Specifically, it's the treble clef, or Sol clef. There're several types of clefs, for instance {\bassclef} or {\altoclef}. They signify which note goes where in the little five bars.
+  \item {\Large $\setmetera{4}{4}$} is the \emph{time signature}. It measures how many \emph{beats} we have in a \emph{measure}. We'll get to understanding that in a moment.
+  \item The {\ql{h}} \ \ and {\hl{h}} \ \ are the notes themselves. Where these little things are positioned determines exactly which note to play, and the way they look determines many many \emph{beats} (how long) to play them. Whether the little tail goes up or down doesn't matter.
+  \item The sheet is divided into \emph{measures} or \emph{bars} by the bar sign |.
+\end{itemize}
+
+tl;dr: It's a place to arrange notes and tell you how long you should play each. That's possibly easier to understand.
+
+Let's look at the first string of the guitar, shall we? \\
+
+\begin{music}
+  \startextract
+    \NOtes \zchar{12}{$mi$}\ql{l} \zchar{12}{$fa$} \ql{m} \zchar{12}{$sol$} \ql{n} \enotes
+  \endextract
+\end{music}
+
+To play mi, strum the high \first string without holding down any frets. To play fa, put your index finger right (\first finger) before the \first fret. Finally, to play sol, put your ring finger (\third finger). Repeat and readjust your fingers until you produce a clean sound without weird buzzes.
+
+\subsection{All the strings}
+
+Behold, the first few notes of each string!\\
+
+\begin{music}
+  \nobarnumbers
+  \startextract
+    \NOtes \zchar{16}{\boxit{1}} \zchar{12}{$mi$}\ql{l} \zchar{12}{$fa$}\ql{m} \zchar{12}{$sol$}\ql{n} \en \bar
+    \NOtes \zchar{16}{\boxit{2}} \zchar{12}{$si$}\ql{i} \zchar{12}{$do$}\ql{j} \zchar{12}{$re$}\ql{k} \en \bar
+    \NOtes \zchar{16}{\boxit{3}} \zchar{12}{$sol$}\qu{g} \zchar{12}{$la$}\cchar{5}{\smalltype\circleit{2}}\ql{h} \en
+  \endextract
+
+  \startextract
+    \NOtes \zchar{16}{\boxit{4}} \zchar{12}{$re$}\qu{d} \zchar{12}{$mi$}\cchar{-5}{\smalltype\circleit{2}}\qu{f} \zchar{12}{$fa$}\cchar{-5}{\smalltype\circleit{3}}\qu{g} \en \bar
+    \NOtes \zchar{16}{\boxit{5}} \zchar{12}{$la$}\cchar{-10}{\smalltype\circleit{2}}\qu{a} \zchar{12}{$si$}\qu{b} \zchar{12}{$do$}\cchar{-10}{\smalltype\circleit{3}}\qu{c} \en \bar
+    \NOtes \zchar{16}{\boxit{6}} \zchar{12}{$mi$}\qu{L} \zchar{12}{$fa$}\qu{M} \zchar{12}{$sol$}\qu{N} \en \bar
+  \endextract
+\end{music}
+
+\section{Playing Music}
+
+You'll be using your hands to play music. You'll be using energy to play music. As with every field, a great difference between a beginner, intermediate, and an expert player is that the expert exerts the least amount of energy, creates the smallest amount of friction.
+
+Whenever you play, be self-critical: Am I comfortable? Is my hand clenched? Is the guitar propped up against my body? Am I leaning forward with my back unnecessarily?
+
+However, and this is most important, when you play, make sure you're having fun. If you're not having fun, change the way you practice or what you're playing. Even ``mindless'' practice should be at least mildly entertaining. I have many suggestions for several skill levels if you're out of any.
+
+\subsection{The Fretting Hand}
+
+The fretting hand is the one you put on the fretboard: Left for right-handed people with right-handed guitars.
+
+When you're just beginning, make sure you apply the right amount of pressure with your fingers: Not too much as to hurt yourself, not too little as to cause an awkward \textit{bzzt}.
+
+Also practice switching notes without looking at the fretboard at all. For instance, play $mi fa sol$ on the \first string while only studying your picking hand technique.
+
+\subsection{The Picking Hand}
+
+When you're just beginning, focus on two primary ways of picking.
+
+When playing the higher strings ({\first}, \second and \third), lean on the string with your index finger, and sort of fall through to the string following it. As you do this motion, stretch your middle finger towards the string you're about to pick, and continue the motion with that finger next.
+
+Basically ``walk'' over the strings you wish to play. Make sure to lean on the strings: When you finish the motion with your finger it should rest on the following string, not in the air. This is very important for a clean and strong sound.
+
+Now, when you play on the lower string (\nth{4}, \nth{5} and \nth{6}), the technique is easier. With your thumb only, do the reverse motion: Rest on the string you wish to play, and push downwards. At the end of the motion, your thumb needs to rest on the following string. Again, this is very important for a clean and strong sound (until you learn and adopt to other techniques, at least).
+
+If you wish, you could play with the ``walking'' techniques on the lower strings. I will never deny you that pleasure.
+
+\subsection{Sitting \& Posture}
+T.B.D.
+
+\section{Chords}
+T.B.D.
+
+\section{Glossary}
+\begin{tabular}{l|l|p{300pt}}
+  Proper name & a.k.a. & Description \\
+  \hline
+  Tone & Step & A unit of measure, ${\Delta}Hz$ between two notes \\
+  Semitone & Half-step & A unit of measure, ${\Delta}Hz$ smaller than two adjacent tones \\
+  Di\`ese & Sharp & Higher by a semitone \\
+  Bemole & Flat & Lower by a semitone \\
+  Fret & \foreignlanguage{russian}{Лад} & The metal thingy partitioning the fretboard \\
+  \hline
+  Beat & Tempo & The invisible \emph{oomph} which reverberates through the universe once every fixed amount of time \\
+  Measure & Bar & A bunch of notes set to a certain beat \\
+  \hline
+  Fingering hand & Left hand & The hand doin the fingerin \\
+  Picking hand & Right hand & The hand doin the pickin \\
+  Strumming hand & Right hand & The hand doin the strumming \\
+  \hline
+  Chord & & More than one note sounding at the same time
+\end{tabular}
+
+\end{document}
